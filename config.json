@@ -1,0 +1,10 @@
+{
+	"exitOnComplete": false,
+	"target": "http://www.furaffinity.net/favorites/YOUR USERNAME HERE/",
+	"dataDirs": [
+		"p/"
+	],
+	"fileDirs": [
+		"i/"
+	]
+}
