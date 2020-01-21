@@ -1,11 +1,10 @@
-import os, requests, pickle, json, time, re, shutil
+import os, requests, json, time
 
 ''' TODO
 Better variable names
 Make code prettier
 Add auto-config
 Add easy secret input
-Cut down imports
 '''
 
 msgs = {
