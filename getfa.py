@@ -1,4 +1,4 @@
-import os, requests, json, time
+import os, requests, json, time, shutil
 
 ''' TODO
 Better variable names
@@ -144,8 +144,8 @@ for f in cfg['fileDirs']:
 
 file_all = set(file_all)
 
-if os.path.isfile('posts404.json'):fnf = read_json('posts_404.json')
-else:fnf = {}
+if os.path.isfile('posts404.json'):fnf = read_json('posts404.json')
+else:fnf = []
 sa = 0
 
 def get_ext(data):
@@ -159,12 +159,16 @@ def get_ext(data):
 
 for post in reversed(list(dj.keys())):
     c += 1
-    if post in file_all:continue
-
+    
+    igot =  post in file_all
+    if igot and post in data[cfg['dataDirs'][0]]:continue
+    if post in fnf:continue
+    
     gotd = False
     for di in cfg['dataDirs']:
         if post in data[di]:
             gotd = True
+            if di != cfg['dataDirs'][0]:shutil.copyfile('{}{}_desc.html'.format(di, post), '{}{}_desc.html'.format(cfg['dataDirs'][0], post))
             with open('{}{}_desc.html'.format(di, post), 'r', encoding='utf8') as fh:
                 d = fh.read()
             
@@ -184,6 +188,8 @@ for post in reversed(list(dj.keys())):
         time.sleep(.1)
         
         d = sg.text
+    
+    if igot:continue
     
     if 'class="download"><a href="' in d:
         fp = get_prop('class="download"><a href="', d)
@@ -208,4 +214,5 @@ for post in reversed(list(dj.keys())):
         sa = 0
         la = c//500
 
+if sa > 0:save_json('posts404.json', fnf)
 if not cfg['exitOnComplete']:input('Complete!')
