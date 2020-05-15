@@ -18,7 +18,7 @@ Example content:
 `{"a": "a_cookie", "b": "b_cookie"}`
 
 ## Config
-Change `target` to the desired favorites/gallery/scraps you want.
+Change `target` to the desired favorites you want.
 * Once everything is how you want it, you can just let it run.
 
 # To be implemented
